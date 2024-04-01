@@ -2,9 +2,10 @@ package woojjam.serversetting.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.annotation.Id;
+import org.springframework.data.redis.core.PartialUpdate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 import woojjam.serversetting.RedisRepository.TestRedisRepository;
 import woojjam.serversetting.entity.TestRedis;
 
@@ -42,5 +43,10 @@ public class TestService {
 
     public void delete() {
         repository.deleteAll();
+    }
+
+    public TestRedis update(TestRedis testRedis) {
+        TestRedis save = repository.save(testRedis);
+        return save;
     }
 }

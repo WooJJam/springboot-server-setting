@@ -79,4 +79,9 @@ public class TestController {
         service.delete();
         return "Success";
     }
+
+    @PostMapping("/redis/update")
+    public TestRedis update(@RequestBody TestRedis testRedis) {
+        return service.update(testRedis);
+    }
 }
