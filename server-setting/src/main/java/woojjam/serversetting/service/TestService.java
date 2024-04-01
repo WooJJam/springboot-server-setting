@@ -1,8 +1,11 @@
 package woojjam.serversetting.service;
 
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.PartialUpdate;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -16,6 +19,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TestService {
 
+    @Resource(name = "redisTemplate")
+    private final ValueOperations<String, String> aa;
     private final TestRedisRepository repository;
 
     @Transactional
@@ -23,6 +28,10 @@ public class TestService {
         // save
         TestRedis test = repository.save(testRedis);
         log.info("test = {}", test);
+//        ValueOperations<String, String> value = redisTemplate.opsForValue();
+        aa.set("test2", "@Resource");
+
+        log.info("value = {}", "@Resource");
         return test;
     }
 
