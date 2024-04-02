@@ -9,11 +9,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import woojjam.serversetting.RedisRepository.TestRedisRepositoryRepo;
 import woojjam.serversetting.dtos.LoginRequestDto;
 import woojjam.serversetting.dtos.UserResponseDto;
-import woojjam.serversetting.entity.TestRedis;
+import woojjam.serversetting.entity.TestRedisRepository;
+import woojjam.serversetting.entity.TestRedisTemplate;
 import woojjam.serversetting.exception.ErrorResponse;
-import woojjam.serversetting.service.TestService;
+import woojjam.serversetting.service.TestRedisRepositoryService;
+import woojjam.serversetting.service.TestRedisTemplateService;
 
 import java.util.Map;
 import java.util.Optional;
@@ -29,7 +32,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class TestController {
 
-    private final TestService service;
+    private final TestRedisRepositoryService testRedisRepositoryService;
+    private final TestRedisTemplateService testRedisTemplateService;
     @Operation(summary = "hello 출력", description = "Hello 문자열을 출력합니다.")
     @GetMapping("/hello")
     public String pinrtHello() {
@@ -55,33 +59,40 @@ public class TestController {
      * @version : 1.0.0
      */
     @PostMapping("/redis/save")
-    public TestRedis saveTest(@RequestBody TestRedis testRedis) {
+    public TestRedisRepository saveTest(@RequestBody TestRedisRepository testRedis) {
         log.info("Controller Request: {}", testRedis);
-        service.save(testRedis);
+        testRedisRepositoryService.save(testRedis);
         return testRedis;
 
     }// save
 
     @PostMapping("/redis/find-test")
-    public Optional<TestRedis> findTest(@RequestBody Map<String, String> testId) {
+    public Optional<TestRedisRepository> findTest(@RequestBody Map<String, String> testId) {
         log.info("Controller Request: {}", testId);
-        return service.findById(testId.get("id"));
+        return testRedisRepositoryService.findById(testId.get("id"));
 
     }// find
 
-    @PostMapping("/redis/count")
+    @PostMapping("/redis-repository/count")
     public Long count() {
-        return service.count();
+        return testRedisRepositoryService.count();
     }
 
-    @PostMapping("/redis/delete")
+    @PostMapping("/redis-repository/delete")
     public String delete() {
-        service.delete();
+        testRedisRepositoryService.delete();
         return "Success";
     }
 
-    @PostMapping("/redis/update")
-    public TestRedis update(@RequestBody TestRedis testRedis) {
-        return service.update(testRedis);
+    @PostMapping("/redis-repository/update")
+    public TestRedisRepository update(@RequestBody TestRedisRepository testRedis) {
+        return testRedisRepositoryService.update(testRedis);
+    }
+
+    @PostMapping("/redis-template/save")
+    public TestRedisTemplate save(@RequestBody TestRedisTemplate testRedisTemplate) {
+        System.out.println("testRedisTemplate = " + testRedisTemplate);
+        testRedisTemplateService.save(testRedisTemplate);
+        return testRedisTemplate;
     }
 }
