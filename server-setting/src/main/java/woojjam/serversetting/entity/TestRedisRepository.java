@@ -18,4 +18,10 @@ public class TestRedisRepository {
     private String name;
     private int age;
     private LocalDateTime createdAt;
+
+    public TestRedisRepository(String id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
 }
