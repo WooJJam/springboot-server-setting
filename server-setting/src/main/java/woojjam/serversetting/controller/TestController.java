@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
-import woojjam.serversetting.RedisRepository.TestRedisRepositoryRepo;
 import woojjam.serversetting.dtos.LoginRequestDto;
 import woojjam.serversetting.dtos.UserResponseDto;
 import woojjam.serversetting.entity.TestRedisRepository;
