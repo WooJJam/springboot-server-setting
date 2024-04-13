@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 @Tag(name = "test 컨트롤러", description = "테스트 API입니다.")
 @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "성공",  content = {@Content(schema = @Schema(implementation = UserResponseDto.class))}),
