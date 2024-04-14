@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import woojjam.serversetting.service.AwsS3Service;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class S3Controller {
 
     @ResponseBody
     @PostMapping("/test")
-    public String s3UploadTest(@RequestParam(name = "image")MultipartFile multipartFile) throws IOException {
-        return awsS3Service.testS3(multipartFile);
+    public Object s3UploadTest(@RequestParam(name = "image")MultipartFile multipartFile) throws IOException, URISyntaxException {
+        return awsS3Service.s3Test(multipartFile);
     }
 }
