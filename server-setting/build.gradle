@@ -50,7 +50,15 @@ dependencies {
 	// jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 
+
+	// aws s3
+//	dependencies {
+//		implementation platform("io.awspring.cloud:spring-cloud-aws-dependencies:3.0.0")
+//		// Replace the following with the starter dependencies of specific modules you wish to use
+//		implementation 'io.awspring.cloud:spring-cloud-aws-starter-sqs'
+//	}
 }
 
 tasks.named('test') {
